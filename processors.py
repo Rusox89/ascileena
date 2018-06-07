@@ -1,20 +1,12 @@
-import logging
-
-
 THRESHOLD = 128
+
 
 def process_tuple(rgb):
     r, b, g = rgb
     return (r + b + g)/3
 
+
 def process_square(square):
-    width = len(square)
-    try:
-        height = len(square[0])
-    except IndexError as e:
-        logging.error("Square received " + str(square))
-        raise
-    
     val = sum(process_tuple(rgb) for row in square for rgb in row)
     num = sum(len(row) for row in square)
 
@@ -30,14 +22,15 @@ def convert(square):
         process_square(square)
     )
 
-very_small_leena = [
-    [(255, 255, 255), (255, 255, 255), (255, 255, 255)],
-    [(255, 255, 255), (255, 255, 255), (255, 255, 255)],
-    [(255, 255, 255), (255, 255, 255), (255, 255, 255)],
-    [(255, 255, 255), (255, 255, 255), (255, 255, 255)],
-]
 
 white_leena = [
+    [(255, 255, 255), (255, 255, 255), (255, 255, 255)],
+    [(255, 255, 255), (255, 255, 255), (255, 255, 255)],
+    [(255, 255, 255), (255, 255, 255), (255, 255, 255)],
+    [(255, 255, 255), (255, 255, 255), (255, 255, 255)],
+]
+
+black_leena = [
     [(0, 0, 0), (0, 0, 0), (0, 0, 0)],
     [(0, 0, 0), (0, 0, 0), (0, 0, 0)],
     [(0, 0, 0), (0, 0, 0), (0, 0, 0)],
@@ -45,9 +38,17 @@ white_leena = [
 ]
 
 
+half_leena = [
+    [(0, 0, 0), (0, 0, 0), (0, 0, 0)],
+    [(0, 0, 0), (0, 0, 0), (0, 0, 0)],
+    [(255, 255, 255), (255, 255, 255), (255, 255, 255)],
+    [(255, 255, 255), (255, 255, 255), (255, 255, 255)],
+]
 
 
-assert process_square(white_leena) == 0
-assert process_square(very_small_leena) == 255
-assert convert(very_small_leena) == '#'
+assert process_square(half_leena) == 127
+assert process_square(black_leena) == 0
+assert process_square(white_leena) == 255
+assert convert(half_leena) == '#'
 assert convert(white_leena) == ' '
+assert convert(black_leena) == '#'
