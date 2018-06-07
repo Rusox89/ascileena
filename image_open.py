@@ -1,4 +1,5 @@
 from PIL import Image
+import sys
 
 import processors
 
@@ -30,7 +31,8 @@ def color_of_position(row_number, col_number, size_ascii_pixel, im):
     return average
 
 # file_name = '/Users/Russ/Downloads/20180103_194743.jpg'
-file_name = 'Lenna_(test_image).png'
+file_name = sys.argv[1]
+# 'Lenna_(test_image).png'
 ascii_columns = 80
 
 im = Image.open(file_name)
