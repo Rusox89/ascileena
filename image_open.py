@@ -1,5 +1,7 @@
 from PIL import Image
 
+import processors
+
 
 def color_of_position(row_number, col_number, size_ascii_pixel, im):
     total_pixels = 0
@@ -52,3 +54,8 @@ for row_number in range(number_of_rows):
     matrix.append(row)
 
 print(matrix)
+
+ascii = processors.convert(matrix)
+
+for row in ascii:
+    print(''.join(row))
